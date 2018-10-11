@@ -1,5 +1,6 @@
 package main
 
+import "fmt"
 
 type Transactor interface{
 	Transact() bool
@@ -12,7 +13,7 @@ type Transaction struct{
 }
 
 func (Transaction) Transact() bool {
-
+return false
 }
 
 func NewTransaction(sender, recipient string, amount int64) Transactor {
@@ -30,7 +31,22 @@ type Block struct {
 
 }
 
-func (b *Block) hash() string{
+func NewDefaultBlock() {
+
+	//x := new([]string) // var a string
+	y := make([]int, 0)
+	var w [1]int
+	x := new([]int)
+	fmt.Println(x, y, w)
+	if *x == nil {
+		fmt.Println("x is  nil")
+	}
+	if y == nil{
+		fmt.Println("y is  nil")
+	}
+	//if w == nil {
+	//	fmt.Println("w is  nil", w)
+	//}
 
 }
 
@@ -48,5 +64,5 @@ type  BlockChain struct{
 }
 
 func main(){
-
+	NewDefaultBlock()
 }
