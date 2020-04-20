@@ -1,68 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"go.uber.org/zap"
 
-type Transactor interface{
-	Transact() bool
-}
+	"github.com/chinmayb/blockChain/blocks"
+)
 
-type Transaction struct{
-	Sender string
-	Recipient string
-	Amount int64
-}
+func main() {
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
+	log := logger.Sugar()
+	log.Debug("initializing..")
 
-func (Transaction) Transact() bool {
-return false
-}
-
-func NewTransaction(sender, recipient string, amount int64) Transactor {
-	return &Transaction{
-		sender, recipient, amount,
-	}
-}
-
-
-type Block struct {
-	index int32
-	transaction Transaction
-	proof int64
-	previousHash string
-
-}
-
-func NewDefaultBlock() {
-
-	//x := new([]string) // var a string
-	y := make([]int, 0)
-	var w [1]int
-	x := new([]int)
-	fmt.Println(x, y, w)
-	if *x == nil {
-		fmt.Println("x is  nil")
-	}
-	if y == nil{
-		fmt.Println("y is  nil")
-	}
-	//if w == nil {
-	//	fmt.Println("w is  nil", w)
-	//}
-
-}
-
-
-type  BlockChainBuilder interface{
-	NewTransaction() Transactor
-	LasBlock() Block
-	NewBlock() Block
-}
-
-
-type  BlockChain struct{
-	chain []Block
-
-}
-
-func main(){
-	NewDefaultBlock()
+	// this will be the head
+	_ = blocks.GetGenesisBlock()
 }
